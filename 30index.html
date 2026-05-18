@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Expense Splitter</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial;
+}
+
+body{
+    background:#0f172a;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.container{
+    width:420px;
+    background:#1e293b;
+    padding:25px;
+    border-radius:20px;
+    color:white;
+    box-shadow:0 0 20px rgba(0,0,0,0.4);
+}
+
+h2{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+input{
+    width:100%;
+    padding:14px;
+    margin-top:12px;
+    border:none;
+    border-radius:12px;
+    background:#334155;
+    color:white;
+    outline:none;
+    font-size:16px;
+}
+
+button{
+    width:100%;
+    padding:14px;
+    margin-top:15px;
+    border:none;
+    border-radius:12px;
+    background:#22c55e;
+    color:white;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#16a34a;
+}
+
+.result{
+    margin-top:20px;
+    background:#334155;
+    padding:15px;
+    border-radius:12px;
+    line-height:1.8;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>Expense Splitter</h2>
+
+    <input type="number"
+    id="total"
+    placeholder="Total amount">
+
+    <input type="number"
+    id="people"
+    placeholder="Number of people">
+
+    <input type="number"
+    id="tip"
+    placeholder="Tip percentage (optional)">
+
+    <button onclick="splitBill()">
+        Calculate
+    </button>
+
+    <div class="result" id="result">
+
+        Natija shu yerda chiqadi 💸
+
+    </div>
+
+</div>
+
+<script>
+
+function splitBill(){
+
+    let total =
+    Number(document.getElementById("total").value);
+
+    let people =
+    Number(document.getElementById("people").value);
+
+    let tip =
+    Number(document.getElementById("tip").value);
+
+    let result =
+    document.getElementById("result");
+
+    if(total <= 0 || people <= 0){
+
+        result.innerHTML =
+        "To‘g‘ri qiymat kiriting ❌";
+
+        return;
+    }
+
+    let tipAmount =
+    total * (tip / 100);
+
+    let finalTotal =
+    total + tipAmount;
+
+    let perPerson =
+    finalTotal / people;
+
+    result.innerHTML = `
+        💰 Total: ${finalTotal.toFixed(2)} <br>
+        👥 Per Person: ${perPerson.toFixed(2)} <br>
+        🧾 Tip: ${tipAmount.toFixed(2)}
+    `;
+}
+
+</script>
+
+</body>
+</html>
